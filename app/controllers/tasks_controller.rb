@@ -4,9 +4,13 @@ class TasksController < ApplicationController
     end
     def create
         @task = Task.create(task_params)
-        redirect_to root_path
+	@task = Task.all
     end
-
+    def destroy
+	@task = Task.find(params[:id])
+	@task.destroy
+	@task = Task.all
+    end
     private
     def task_params
         params.require(:task).permit(:title,:note,:completed)
